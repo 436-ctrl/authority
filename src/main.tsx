@@ -4,6 +4,7 @@ import App from "./App";
 import StorePage from "./components/StorePage";
 import MasterSelectorModal from "./components/MasterSelectorModal";
 import { MASTER_CONFIGS, MASTER_SELECTION_KEY, isMasterId, type MasterId } from "./config/masters";
+import { getRoutePath } from "./utils/appPaths";
 import "./index.css";
 
 const getInitialMasterId = (): MasterId => {
@@ -18,8 +19,11 @@ const getInitialMasterId = (): MasterId => {
 
 function RootRouter() {
   const [selectedMasterId, setSelectedMasterId] = useState<MasterId>(getInitialMasterId);
-  const pathname = useMemo(() => window.location.pathname.replace(/\/+$/, "") || "/", []);
-  const isStoreRoute = pathname.toLowerCase() === "/store";
+  const routePath = useMemo(() => getRoutePath(), []);
+  const isStoreRoute = useMemo(() => {
+    const view = new URLSearchParams(window.location.search).get("view");
+    return view === "store" || routePath.toLowerCase() === "/store";
+  }, [routePath]);
   const [selectorOpen, setSelectorOpen] = useState(!isStoreRoute);
   const selectedMaster = MASTER_CONFIGS[selectedMasterId];
 
@@ -29,8 +33,13 @@ function RootRouter() {
 
     const url = new URL(window.location.href);
     url.searchParams.set("master", selectedMasterId);
+    if (isStoreRoute) {
+      url.searchParams.set("view", "store");
+    } else {
+      url.searchParams.delete("view");
+    }
     window.history.replaceState({}, "", `${url.pathname}${url.search}`);
-  }, [selectedMasterId]);
+  }, [isStoreRoute, selectedMasterId]);
 
   const handleSelectMaster = (masterId: MasterId) => {
     setSelectedMasterId(masterId);

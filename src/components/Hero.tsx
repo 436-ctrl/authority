@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useParallax } from "../hooks/useParallax";
 import type { MasterConfig } from "../config/masters";
+import { assetPath } from "../utils/appPaths";
 import MonoFlag from "./MonoFlag";
 
 interface HeroProps {
@@ -15,6 +16,8 @@ function Hero({ onEnter, master, storeHref }: HeroProps) {
   const coverY = useParallax(scrollYProgress, -96);
   const glowY = useParallax(scrollYProgress, -56);
   const coverScale = useTransform(scrollYProgress, [0, 1], [1.08, 1]);
+  const fallbackCoverSrc = assetPath("/place/hero-cover.png");
+  const fallbackFloatingSrc = assetPath("/place/hero-floating-foot.png");
 
   const [isHovering, setIsHovering] = useState(false);
   const [coverSrc, setCoverSrc] = useState(master.heroCover);
@@ -205,8 +208,8 @@ function Hero({ onEnter, master, storeHref }: HeroProps) {
               ease: [0.76, 0, 0.24, 1],
             }}
             onError={() => {
-              if (floatingSrc !== "/place/hero-floating-foot.png") {
-                setFloatingSrc("/place/hero-floating-foot.png");
+              if (floatingSrc !== fallbackFloatingSrc) {
+                setFloatingSrc(fallbackFloatingSrc);
                 return;
               }
               setShowFloating(false);
@@ -220,8 +223,8 @@ function Hero({ onEnter, master, storeHref }: HeroProps) {
         alt=""
         className="hidden"
         onError={() => {
-          if (coverSrc !== "/place/hero-cover.png") {
-            setCoverSrc("/place/hero-cover.png");
+          if (coverSrc !== fallbackCoverSrc) {
+            setCoverSrc(fallbackCoverSrc);
           }
         }}
       />

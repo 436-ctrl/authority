@@ -1,34 +1,35 @@
 import { useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import type { MasterId } from "../config/masters";
+import { assetPath } from "../utils/appPaths";
 import Lightbox, { type GalleryItem } from "./Lightbox";
 
 const ALPHA_GALLERY_ITEMS: GalleryItem[] = [
-  { id: 1, src: "/place/gallery-01.jpg", alt: "Foot session by Master", caption: "Stronger Than You" },
-  { id: 2, src: "/place/gallery-02.jpg", alt: "Foot session by Master", caption: "Kneel, Then Breathe" },
-  //{ id: 3, src: "/place/gallery-03.jpg", alt: "Foot session by Master", caption: "Step Into Silence" },
-  { id: 4, src: "/place/gallery-04.jpg", alt: "Foot session by Master", caption: "Obey Without Questions" },
-  { id: 5, src: "/place/gallery-05.jpg", alt: "Foot session by Master", caption: "My Pace, Your Prayer" },
-  { id: 6, src: "/place/gallery-06.jpg", alt: "Foot session by Master", caption: "Earn Every Glance" },
-  { id: 7, src: "/place/gallery-07.jpg", alt: "Foot session by Master", caption: "Shoe Dust Above Bloodlines" },
-   { id: 8, src: "/place/hov.jpg", alt: "Foot session by Master", caption: "Worth More Than You" },
-  { id: 9, src: "/place/gallery-08.jpg", alt: "Foot session by Master", caption: "You Follow, I Lead" },
+  { id: 1, src: assetPath("/place/gallery-01.jpg"), alt: "Foot session by Master", caption: "Stronger Than You" },
+  { id: 2, src: assetPath("/place/gallery-02.jpg"), alt: "Foot session by Master", caption: "Kneel, Then Breathe" },
+  //{ id: 3, src: assetPath("/place/gallery-03.jpg"), alt: "Foot session by Master", caption: "Step Into Silence" },
+  { id: 4, src: assetPath("/place/gallery-04.jpg"), alt: "Foot session by Master", caption: "Obey Without Questions" },
+  { id: 5, src: assetPath("/place/gallery-05.jpg"), alt: "Foot session by Master", caption: "My Pace, Your Prayer" },
+  { id: 6, src: assetPath("/place/gallery-06.jpg"), alt: "Foot session by Master", caption: "Earn Every Glance" },
+  { id: 7, src: assetPath("/place/gallery-07.jpg"), alt: "Foot session by Master", caption: "Shoe Dust Above Bloodlines" },
+  { id: 8, src: assetPath("/place/hov.jpg"), alt: "Foot session by Master", caption: "Worth More Than You" },
+  { id: 9, src: assetPath("/place/gallery-08.jpg"), alt: "Foot session by Master", caption: "You Follow, I Lead" },
  
-  { id: 10, src: "/place/gallery-09.jpg", alt: "Foot session by Master", caption: "Stay Low, Stay Loyal" },
+  { id: 10, src: assetPath("/place/gallery-09.jpg"), alt: "Foot session by Master", caption: "Stay Low, Stay Loyal" },
 ];
 
 const WOLF_GALLERY_ITEMS: GalleryItem[] = [
-  { id: 201, src: "/place/wolf-gallery-01.jpg", alt: "Wolf session frame", caption: "The Den Is Not A Democracy" },
-  { id: 202, src: "/place/wolf-gallery-02.jpg", alt: "Wolf session frame", caption: "You Enter On My Terms" },
-  { id: 203, src: "/place/wolf-gallery-03.jpg", alt: "Wolf session frame", caption: "Silence. Focus. Obey." },
-  { id: 204, src: "/place/wolf-gallery-08.jpg", alt: "Wolf session frame", caption: "Look Up Only When Told" },
+  { id: 201, src: assetPath("/place/wolf-gallery-01.jpg"), alt: "Wolf session frame", caption: "The Den Is Not A Democracy" },
+  { id: 202, src: assetPath("/place/wolf-gallery-02.jpg"), alt: "Wolf session frame", caption: "You Enter On My Terms" },
+  { id: 203, src: assetPath("/place/wolf-gallery-03.jpg"), alt: "Wolf session frame", caption: "Silence. Focus. Obey." },
+  { id: 204, src: assetPath("/place/wolf-gallery-08.jpg"), alt: "Wolf session frame", caption: "Look Up Only When Told" },
 
-  { id: 205, src: "/place/wolf-gallery-05.jpg", alt: "Wolf session frame", caption: "Every Step Is Command" },
-    { id: 206, src: "/place/wolf-gallery-04.jpg", alt: "Wolf session frame", caption: "No Bargains In The Den" },
-  { id: 207, src: "/place/wolf-gallery-06.jpg", alt: "Wolf session frame", caption: "Stay Sharp, Stay Useful" },
-  { id: 208, src: "/place/wolf-gallery-07.jpg", alt: "Wolf session frame", caption: "Red Line. Black Rules." },
-  { id: 209, src: "/place/wolf-gallery-09.jpg", alt: "Wolf session frame", caption: "Your Place Is Under The Wolf" },
-  { id: 210, src: "/place/wolf-gallery-10.jpg", alt: "Wolf session frame", caption: "I Decide The Pace" },
+  { id: 205, src: assetPath("/place/wolf-gallery-05.jpg"), alt: "Wolf session frame", caption: "Every Step Is Command" },
+  { id: 206, src: assetPath("/place/wolf-gallery-04.jpg"), alt: "Wolf session frame", caption: "No Bargains In The Den" },
+  { id: 207, src: assetPath("/place/wolf-gallery-06.jpg"), alt: "Wolf session frame", caption: "Stay Sharp, Stay Useful" },
+  { id: 208, src: assetPath("/place/wolf-gallery-07.jpg"), alt: "Wolf session frame", caption: "Red Line. Black Rules." },
+  { id: 209, src: assetPath("/place/wolf-gallery-09.jpg"), alt: "Wolf session frame", caption: "Your Place Is Under The Wolf" },
+  { id: 210, src: assetPath("/place/wolf-gallery-10.jpg"), alt: "Wolf session frame", caption: "I Decide The Pace" },
 ];
 
 interface GalleryProps {
@@ -37,6 +38,7 @@ interface GalleryProps {
 
 function Gallery({ masterId }: GalleryProps) {
   const [activeItem, setActiveItem] = useState<GalleryItem | null>(null);
+  const fallbackGalleryImage = assetPath("/place/gallery-01.jpg");
 
   const galleryItems = useMemo(
     () => (masterId === "wolf" ? WOLF_GALLERY_ITEMS : ALPHA_GALLERY_ITEMS),
@@ -104,7 +106,7 @@ function Gallery({ masterId }: GalleryProps) {
                 loading="lazy"
                 onError={(event) => {
                   if (event.currentTarget.src.includes("/place/gallery-01.jpg")) return;
-                  event.currentTarget.src = "/place/gallery-01.jpg";
+                  event.currentTarget.src = fallbackGalleryImage;
                 }}
               />
               <div className="pointer-events-none absolute inset-0 bg-kufiya opacity-0 mix-blend-screen transition-opacity duration-500 group-hover:opacity-20" />

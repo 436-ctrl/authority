@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import type { MasterConfig } from "../config/masters";
 import { STORE_CATALOGS } from "../config/storeCatalog";
+import { assetPath, buildAppHref } from "../utils/appPaths";
 
 interface StorePageProps {
   master: MasterConfig;
@@ -14,6 +15,8 @@ function StorePage({ master, onOpenSelector }: StorePageProps) {
   const [page, setPage] = useState(1);
   const [cart, setCart] = useState<Record<number, number>>({});
   const [activeProductId, setActiveProductId] = useState<number | null>(null);
+  const landingHref = buildAppHref("/", { master: master.id });
+  const fallbackProductImage = assetPath("/store/alpha/used-socks-01.jpg");
 
   const products = STORE_CATALOGS[master.id];
   const totalPages = Math.max(1, Math.ceil(products.length / PAGE_SIZE));
@@ -99,7 +102,7 @@ function StorePage({ master, onOpenSelector }: StorePageProps) {
   return (
     <div data-master-theme={master.id} className="min-h-screen bg-void px-6 pb-16 pt-24 text-paper md:px-10">
       <header className="mx-auto flex w-full max-w-[90rem] items-center justify-between border-b pb-6" style={{ borderColor: "var(--theme-border)" }}>
-        <a href={`/?master=${master.id}`} className="font-display text-xl tracking-[0.1em] text-paper">
+        <a href={landingHref} className="font-display text-xl tracking-[0.1em] text-paper">
           Master {master.masterName} Store
         </a>
         <div className="flex items-center gap-2">
@@ -112,7 +115,7 @@ function StorePage({ master, onOpenSelector }: StorePageProps) {
             Switch Master
           </button>
           <a
-            href={`/?master=${master.id}`}
+            href={landingHref}
             className="rounded-full border px-5 py-2 text-xs uppercase tracking-[0.24em] text-paper/80 transition-colors duration-300 hover:text-paper"
             style={{ borderColor: "var(--theme-border)" }}
           >
@@ -154,7 +157,7 @@ function StorePage({ master, onOpenSelector }: StorePageProps) {
                   loading="lazy"
                   onError={(event) => {
                     if (event.currentTarget.src.includes("/store/alpha/used-socks-01.jpg")) return;
-                    event.currentTarget.src = "/store/alpha/used-socks-01.jpg";
+                    event.currentTarget.src = fallbackProductImage;
                   }}
                 />
                 <div className="p-5">

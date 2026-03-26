@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import type { MasterConfig } from "../config/masters";
+import { assetPath } from "../utils/appPaths";
 
 interface ServiceItem {
   title: string;
@@ -70,6 +71,7 @@ interface ServicesProps {
 
 function Services({ master }: ServicesProps) {
   const services = SERVICES_BY_MASTER[master.id];
+  const fallbackServicesImage = assetPath("/place/hov.jpg");
 
   return (
     <section id="services" className="relative px-6 py-24 md:px-10">
@@ -136,7 +138,7 @@ function Services({ master }: ServicesProps) {
               loading="lazy"
               onError={(event) => {
                 if (event.currentTarget.src.includes("/place/hov.jpg")) return;
-                event.currentTarget.src = "/place/hov.jpg";
+                event.currentTarget.src = fallbackServicesImage;
               }}
             />
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-void/85 via-transparent to-void/20" />

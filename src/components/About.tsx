@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import type { MasterConfig } from "../config/masters";
+import { assetPath } from "../utils/appPaths";
 import MonoFlag from "./MonoFlag";
 
 interface AboutProps {
@@ -11,6 +12,7 @@ function About({ master }: AboutProps) {
   const sectionRef = useRef<HTMLElement | null>(null);
   const inView = useInView(sectionRef, { once: true, amount: 0.28 });
   const [aboutImage, setAboutImage] = useState(master.aboutImage);
+  const fallbackAboutImage = assetPath("/place/master-portrait.jpg");
 
   useEffect(() => {
     setAboutImage(master.aboutImage);
@@ -32,8 +34,8 @@ function About({ master }: AboutProps) {
             className="h-[480px] w-full object-cover"
             loading="lazy"
             onError={() => {
-              if (aboutImage !== "/place/master-portrait.jpg") {
-                setAboutImage("/place/master-portrait.jpg");
+              if (aboutImage !== fallbackAboutImage) {
+                setAboutImage(fallbackAboutImage);
               }
             }}
           />

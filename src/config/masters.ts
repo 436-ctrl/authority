@@ -1,3 +1,5 @@
+import { assetPath } from "../utils/appPaths";
+
 export type MasterId = "alpha" | "wolf";
 
 export interface MasterConfig {
@@ -37,10 +39,10 @@ export const MASTER_CONFIGS: Record<MasterId, MasterConfig> = {
       "Master Alpha Phalastine is rooted in Palestinian identity and disciplined dominance. The kufiya is not decoration, it is inheritance. Each session is built with composure, control, and attention to ritual detail.",
     aboutLineTwo:
       "In silence, every movement carries weight. In command, every boundary is clear. You arrive, you surrender your pace, and you follow the direction set by the Master.",
-    heroCover: "/place/hero-cover.png",
-    floatingImage: "/place/hero-floating-foot.png",
-    aboutImage: "/place/master-portrait.jpg",
-    servicesImage: "/place/hov.jpg",
+    heroCover: assetPath("/place/hero-cover.png"),
+    floatingImage: assetPath("/place/hero-floating-foot.png"),
+    aboutImage: assetPath("/place/master-portrait.jpg"),
+    servicesImage: assetPath("/place/hov.jpg"),
     telegramUsername: "Alphafalastini",
     xHandle: "AlphaFalastini",
     xLink: "https://x.com/AlphaFalastini",
@@ -60,10 +62,10 @@ export const MASTER_CONFIGS: Record<MasterId, MasterConfig> = {
       "Master Wolf moves with a colder tempo: direct command, tighter control, and clean red-black authority. Every session is measured, deliberate, and fully on his terms.",
     aboutLineTwo:
       "You enter the den to follow instructions, not negotiate them. Respect the rules, keep your focus, and earn every second under the Wolf's attention.",
-    heroCover: "/wolf.png",
-    floatingImage: "/place/wolf-floating-foot.png",
-    aboutImage: "/place/wolf-portrait.jpg",
-    servicesImage: "/place/wolf-services.jpg",
+    heroCover: assetPath("/wolf.png"),
+    floatingImage: assetPath("/place/wolf-floating-foot.png"),
+    aboutImage: assetPath("/place/wolf-portrait.jpg"),
+    servicesImage: assetPath("/place/wolf-services.jpg"),
     telegramUsername: "Directact90",
     xHandle: "DirectAct",
     xLink: "https://x.com/DirectAct",

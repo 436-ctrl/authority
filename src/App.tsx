@@ -7,6 +7,7 @@ import Booking from "./components/Booking";
 import Footer from "./components/Footer";
 import FloatingTelegramButton from "./components/FloatingTelegramButton";
 import type { MasterConfig } from "./config/masters";
+import { buildAppHref } from "./utils/appPaths";
 
 const NAV_ITEMS = [
   { href: "#gallery", label: "Gallery" },
@@ -31,7 +32,7 @@ function App({ master, onOpenSelector }: AppProps) {
   const telegramLink = `https://t.me/${master.telegramUsername}?text=${encodeURIComponent(master.telegramPrefill)}`;
   const xLink = master.xLink ?? `https://x.com/${master.xHandle}`;
   const instagramLink = master.instagramLink ?? `https://instagram.com/${master.instagramHandle}`;
-  const storeHref = `/store?master=${master.id}`;
+  const storeHref = buildAppHref("/", { master: master.id, view: "store" });
 
   const handleEnter = () => {
     document.getElementById("gallery")?.scrollIntoView({ behavior: "smooth", block: "start" });

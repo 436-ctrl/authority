@@ -24,6 +24,12 @@ npm run build
 npm run preview
 ```
 
+## Deploy (GitHub Pages)
+
+Push to `main` and the GitHub Actions workflow in `.github/workflows/deploy-pages.yml` will build and publish the site to GitHub Pages.
+
+The workflow automatically builds with the repository subpath as the Vite base path, so assets and links work correctly on Pages.
+
 ## Project Structure
 
 ```text
