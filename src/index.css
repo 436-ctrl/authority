@@ -1,0 +1,80 @@
+@import url("https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500;6..96,700&family=Noto+Kufi+Arabic:wght@400;500;700&family=Teko:wght@500;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+  --void: #000000;
+  --ink: #111111;
+  --char: #222222;
+  --paper: #ffffff;
+  --theme-accent: #ffffff;
+  --theme-accent-ink: #000000;
+  --theme-border: rgba(255, 255, 255, 0.25);
+  --theme-border-strong: rgba(255, 255, 255, 0.6);
+  --theme-glow: rgba(255, 255, 255, 0.25);
+  --theme-surface: rgba(34, 34, 34, 0.5);
+  --kufiya-pattern: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96'%3E%3Crect width='96' height='96' fill='%23000'/%3E%3Cg fill='none' stroke='%23fff' stroke-opacity='.1' stroke-width='1'%3E%3Cpath d='M0 0L96 96M96 0L0 96'/%3E%3Cpath d='M0 24H96M0 48H96M0 72H96M24 0V96M48 0V96M72 0V96'/%3E%3C/g%3E%3Cg fill='%23fff' fill-opacity='.06'%3E%3Cpath d='M48 10l6 6-6 6-6-6zM10 48l6 6-6 6-6-6zM86 48l6 6-6 6-6-6zM48 86l6 6-6 6-6-6z'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+[data-master-theme="wolf"] {
+  --theme-accent: #ff1f1f;
+  --theme-accent-ink: #060606;
+  --theme-border: rgba(255, 46, 46, 0.35);
+  --theme-border-strong: rgba(255, 88, 88, 0.8);
+  --theme-glow: rgba(255, 36, 36, 0.42);
+  --theme-surface: rgba(56, 10, 10, 0.45);
+}
+
+@layer base {
+  * {
+    @apply border-paper/15;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-void text-paper antialiased;
+    margin: 0;
+    font-family: "Noto Kufi Arabic", sans-serif;
+    background-image:
+      radial-gradient(circle at 20% 12%, rgba(255, 255, 255, 0.08), transparent 30%),
+      radial-gradient(circle at 86% 0%, rgba(255, 255, 255, 0.05), transparent 24%);
+  }
+
+  #root {
+    min-height: 100vh;
+  }
+
+  h1,
+  h2,
+  h3,
+  .font-display {
+    font-family: "Bodoni Moda", serif;
+  }
+
+  [data-master-theme="wolf"] .font-display {
+    font-family: "Teko", sans-serif;
+    letter-spacing: 0.03em;
+  }
+}
+
+@layer components {
+  .kufiya-surface {
+    background-image: var(--kufiya-pattern);
+    background-size: 96px 96px;
+  }
+
+  .input-shell {
+    @apply w-full rounded-xl border bg-char/70 px-4 py-3 text-sm text-paper outline-none transition-colors duration-300 placeholder:text-paper/45;
+    border-color: var(--theme-border);
+  }
+
+  .input-shell:focus {
+    border-color: var(--theme-border-strong);
+  }
+}

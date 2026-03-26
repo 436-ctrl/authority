@@ -1,0 +1,2 @@
+Alpha store needed in this folder:
+- none (all required alpha store images are present)

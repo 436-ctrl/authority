@@ -1,0 +1,20 @@
+Alpha needed in this folder:
+- none (alpha place assets are already present)
+
+Wolf needed in this folder:
+- wolf-floating-foot.png
+- wolf-portrait.jpg
+- wolf-services.jpg
+- wolf-gallery-01.jpg
+- wolf-gallery-02.jpg
+- wolf-gallery-03.jpg
+- wolf-gallery-04.jpg
+- wolf-gallery-05.jpg
+- wolf-gallery-06.jpg
+- wolf-gallery-07.jpg
+- wolf-gallery-08.jpg
+- wolf-gallery-09.jpg
+- wolf-gallery-10.jpg
+
+Note:
+- Wolf hero cover is now using /public/wolf.png directly.

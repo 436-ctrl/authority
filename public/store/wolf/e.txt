@@ -1,0 +1,10 @@
+Wolf store needed in this folder:
+- wolf-socks-01.jpg
+- wolf-socks-02.jpg
+- wolf-socks-03.jpg
+- wolf-shoes-01.jpg
+- wolf-shoes-02.jpg
+- wolf-shoes-03.jpg
+- wolf-underwear-01.jpg
+- wolf-underwear-02.jpg
+- wolf-underwear-03.jpg
