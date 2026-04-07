@@ -2,6 +2,15 @@ import { assetPath } from "../utils/appPaths";
 
 export type MasterId = "alpha" | "wolf";
 
+export type ContactPlatform = "whatsapp" | "instagram" | "telegram" | "x" | "facebook" | "snapchat";
+
+export interface MasterContactLink {
+  platform: ContactPlatform;
+  label: string;
+  value: string;
+  href: string;
+}
+
 export interface MasterConfig {
   id: MasterId;
   masterName: string;
@@ -22,6 +31,7 @@ export interface MasterConfig {
   instagramHandle: string;
   instagramLink?: string;
   telegramPrefill: string;
+  contactLinks?: MasterContactLink[];
 }
 
 export const MASTER_SELECTION_KEY = "selected_master_id";
@@ -53,11 +63,11 @@ export const MASTER_CONFIGS: Record<MasterId, MasterConfig> = {
   wolf: {
     id: "wolf",
     masterName: "Wolf",
-    location: "Syria",
+    location: "Lebanon",
     age: 30,
-    masterTitle: "Syrian Wolf Master",
-    heroSubline: "\u0633\u064A\u062F \u0627\u0644\u0630\u0626\u0628 \u0645\u0646 \u0633\u0648\u0631\u064A\u0627 \u2022 Obey the Wolf",
-    originLabel: "\u0645\u0646 \u0633\u0648\u0631\u064A\u0627",
+    masterTitle: "Lebanese Wolf Master",
+    heroSubline: "\u0627\u062E\u0636\u0639 \u0644\u0645\u0648\u0644\u0627\u0643 \u2022 Obey the Wolf",
+    originLabel: "\u0645\u0646 \u0644\u0628\u0646\u0627\u0646",
     aboutLineOne:
       "Master Wolf moves with a colder tempo: direct command, tighter control, and clean red-black authority. Every session is measured, deliberate, and fully on his terms.",
     aboutLineTwo:
@@ -72,6 +82,44 @@ export const MASTER_CONFIGS: Record<MasterId, MasterConfig> = {
     instagramHandle: "Directact90",
     instagramLink: "https://www.instagram.com/Directact90",
     telegramPrefill: "Assalamualaikum Master Wolf, I want to book a session \uD83D\uDC3A",
+    contactLinks: [
+      {
+        platform: "whatsapp",
+        label: "WhatsApp",
+        value: "+96170174071",
+        href: "https://wa.me/96170174071",
+      },
+      {
+        platform: "instagram",
+        label: "Instagram",
+        value: "Directact90",
+        href: "https://www.instagram.com/Directact90",
+      },
+      {
+        platform: "telegram",
+        label: "Telegram",
+        value: "Directact90",
+        href: "https://t.me/Directact90",
+      },
+      {
+        platform: "x",
+        label: "X",
+        value: "Directact",
+        href: "https://x.com/DirectAct",
+      },
+      {
+        platform: "facebook",
+        label: "Facebook",
+        value: "Directact90",
+        href: "https://www.facebook.com/Directact90",
+      },
+      {
+        platform: "snapchat",
+        label: "Snapchat",
+        value: "@directact",
+        href: "https://www.snapchat.com/@directact",
+      },
+    ],
   },
 };
 
